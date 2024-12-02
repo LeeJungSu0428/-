@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int count = 0;
+        int countY = 0;
+        int countM = 0;
+        int k = Integer.parseInt(sc.nextLine());
+        if(k<=20){
+            String str = sc.nextLine();
+            String[] words = str.split(" ");
+            if (k==words.length){
+                 for (String word : words){
+                     int i = Integer.parseInt(word);
+                     int c = i/30;
+                     int u = i/60;
+                     countY = countY + 10*(c+1);
+                     countM = countM + 15*(u+1);
+                     
+            }
+            if (countY < countM){
+                System.out.println("Y "+countY);
+            } else if (countY > countM){
+                System.out.println("M " + countM);
+            } else {
+                System.out.println("Y M "+countY);
+            }
+            }
+            
+                
+            
+        }
+    }
+}
