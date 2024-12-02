@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+
+class Main {
+    public static void main(String[] args) {
+        int count = 0;
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            String str = sc.nextLine();
+            if (str.equals("#") || str == null){
+                break;
+            } else {
+                for (int c=0;c<str.length();c++){
+                    char ch = str.charAt(c);
+                    String st = Character.toString(ch);
+                    if (st.equals("A") || st.equals("E") || st.equals("I") || st.equals("O") || st.equals("U") || st.equals("a") || st.equals("e") || st.equals("i") || st.equals("o") || st.equals("u")){
+                         count = count + 1;
+                    }
+                }
+                System.out.println(count);
+                count = 0;
+            }   //else에 걸리는 괄호
+                
+            }
+        }
+    }
