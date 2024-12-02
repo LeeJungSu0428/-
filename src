@@ -1,1 +1,27 @@
+import java.util.Scanner;
 
+
+class Main {
+    public static void main(String[] args) {
+        int count = 0;
+        System.out.println("Put the String");
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            String str = sc.next();
+            if (str.equals("#")){
+                break;
+            } else {
+                for (int c=0;c<str.length();c++){
+                    char ch = str.charAt(c);
+                    String st = Character.toString(ch);
+                    st.toUpperCase();
+                    if (st.equals("A") || st.equals("E") || st.equals("I") || st.equals("O") || st.equals("U")){
+                         count = count + 1;
+                    }
+                }
+            }   //else에 걸리는 괄호
+                
+            }
+            System.out.println("Number of String is "+count);
+        }
+    }
