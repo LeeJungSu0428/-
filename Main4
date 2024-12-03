@@ -13,14 +13,23 @@ class Main {
             int intValue = (int) Math.pow(8,k);
             c = c + u*intValue;
         }
-        String St;
+        StringBuffer St = new StringBuffer();
         while(true){
-            if (c%2 = 0){
+            if (c/2 == 1){
+            St.append(c%2+"1");
+            break;
+            }else if(c/2 == 0){
+            St.append(c%2+"0");
+            break;
+            }else if(c%2 == 1){
                 c = c/2;
-                St = 
+                St.append("1");
+            }else if (c%2 == 0){
+                c = c/2;
+                St.append("0");
             }
         }
-        
-        System.out.println(c);
+        String last = St.reverse().toString();
+        System.out.println(last);
     }
 }
