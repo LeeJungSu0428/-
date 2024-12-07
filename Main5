@@ -7,12 +7,15 @@ import java.math.BigInteger;
 
 class Main {
     public static void main(String[] args) {
-        List<int> final = new ArrayList<>();
+        List finallist = new ArrayList();
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);
         int textint = sc.nextInt();
         while(true){
             if(textint == 0){
+                for(int i=0;i<finallist.size();i++){
+                    System.out.println(finallist.get(i));
+                }
                 break;
             }else{
                 String str = sc2.nextLine();
@@ -22,9 +25,14 @@ class Main {
                 BigInteger num1 = new BigInteger(a);
                 BigInteger num2 = num1.pow(b);
                 String ss = num2.toString();
-                char sss = ss.charAt(ss.length()-1);   //2147483647
+                char sss = ss.charAt(ss.length()-1);
+                String strr = Character.toString(sss);
+                if (strr.equals("0")){
+                    finallist.add("10");
+                }else{
                 textint = textint - 1;
-                System.out.println(sss);
+                finallist.add(sss);
+                }
             }
         }
     }
