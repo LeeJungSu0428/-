@@ -7,10 +7,10 @@ import java.math.BigInteger;
 
 class Main {
     public static void main(String[] args) {
-        List finallist = new ArrayList();
+        List<String> finallist = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        Scanner sc2 = new Scanner(System.in);
         int textint = sc.nextInt();
+        sc.nextLine();
         while(true){
             if(textint == 0){
                 for(int i=0;i<finallist.size();i++){
@@ -18,7 +18,7 @@ class Main {
                 }
                 break;
             }else{
-                String str = sc2.nextLine();
+                String str = sc.nextLine();
                 String[] word = str.split(" ");
                 String a = word[0];
                 int b = Integer.parseInt(word[1]);
@@ -28,10 +28,11 @@ class Main {
                 char sss = ss.charAt(ss.length()-1);
                 String strr = Character.toString(sss);
                 if (strr.equals("0")){
+                    textint = textint - 1;
                     finallist.add("10");
                 }else{
                 textint = textint - 1;
-                finallist.add(sss);
+                finallist.add(strr);
                 }
             }
         }
