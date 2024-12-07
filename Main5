@@ -1,0 +1,31 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.math.BigInteger;
+
+
+
+class Main {
+    public static void main(String[] args) {
+        List<int> final = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
+        int textint = sc.nextInt();
+        while(true){
+            if(textint == 0){
+                break;
+            }else{
+                String str = sc2.nextLine();
+                String[] word = str.split(" ");
+                String a = word[0];
+                int b = Integer.parseInt(word[1]);
+                BigInteger num1 = new BigInteger(a);
+                BigInteger num2 = num1.pow(b);
+                String ss = num2.toString();
+                char sss = ss.charAt(ss.length()-1);   //2147483647
+                textint = textint - 1;
+                System.out.println(sss);
+            }
+        }
+    }
+}
