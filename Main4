@@ -33,3 +33,39 @@ class Main {
         System.out.println(last);
     }
 }
+
+//chat GPT로 개선된 코드
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+
+        // 8진수 "0"인 경우 처리
+        if (str.equals("0")) {
+            System.out.println("0");
+            return;
+        }
+
+        StringBuilder result = new StringBuilder();
+
+        // 8진수를 2진수로 변환
+        for (int i = 0; i < str.length(); i++) {
+            // 각 8진수 숫자를 3자리 2진수로 변환
+            int digit = Character.getNumericValue(str.charAt(i));
+            String binary = Integer.toBinaryString(digit);
+
+            // 8진수의 첫 자리는 "0"을 제외한 그대로 출력
+            if (i == 0) {
+                result.append(binary);
+            } else {
+                // 첫 자리가 아니면, 3자리 이진수로 맞추어 붙이기
+                result.append(String.format("%3s", binary).replace(' ', '0'));
+            }
+        }
+
+        // 출력
+        System.out.println(result.toString());
+    }
+}
