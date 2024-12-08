@@ -1,0 +1,62 @@
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.lang.Math;
+
+
+// class factorial{
+//    public int Cal(int num){
+//        if(num == 1){
+//            return 1;
+//        }else{
+//            return num*Cal(num-1);
+//        }
+        
+//    }
+    
+// }
+
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int textline = sc.nextInt();
+        List<Integer> finallist = new ArrayList<>();
+        List<Double> result = new ArrayList<>();
+        int num1 = 1;
+        int num2 = 1;
+        double num = 1;
+        sc.nextLine();
+        while(true){
+            if (textline == 0){
+                for(int list : finallist){
+                    System.out.println(list);
+                }
+                break;
+        }else{
+            result.clear();
+            num = 1;
+            String str = sc.nextLine();
+            String[] word = str.split(" ");
+            int a = Integer.parseInt(word[0]);
+            int b = Integer.parseInt(word[1]);
+            int d = a;
+            for(int i = 0;i<d;i++){
+                double num3 = b/(double)a;
+                a=a-1;
+                b=b-1;
+                result.add(num3);
+            }
+            for(double number : result){
+                num = num * number;
+            }
+            int numR = (int) Math.round(num);
+            finallist.add(numR);
+            textline = textline - 1;
+            
+        }
+        
+        
+    }
+}
+}
