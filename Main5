@@ -143,3 +143,62 @@ class Main {
         }
     }
 }         //챗지피티 버전
+
+
+
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+class Main {
+    public static void main(String[] args) {
+        List<String> finallist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int c = 0;
+        int textint = sc.nextInt();
+        sc.nextLine();
+        while(true){
+            if(textint == 0){
+                for(int i=0;i<finallist.size();i++){
+                    System.out.println(finallist.get(i));
+                }
+                break;
+            }else{
+                String str = sc.nextLine();
+                String[] word = str.split(" ");
+                int a = Integer.parseInt(word[0]);
+                int b = Integer.parseInt(word[1]);
+                if (a%10 == 0){
+                  finallist.add("10");
+                  textint = textint - 1;
+                }else{
+                switch (b%4){
+                    case 1:
+                        c = a%10;
+                        finallist.add(Integer.toString(c));
+                        break;
+                    case 2:
+                        c = a*a%10;
+                        finallist.add(Integer.toString(c));
+                        break;
+                    case 3:
+                        c = a*a*a%10;
+                        finallist.add(Integer.toString(c));
+                        break;
+                    case 0:
+                        c = a*a*a*a%10;
+                        finallist.add(Integer.toString(c));
+                        break;
+                        }
+                        textint = textint - 1;
+                        }
+                        }
+
+                      }
+                      
+                }
+            }  //최종버전
+
