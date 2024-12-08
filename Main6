@@ -1,0 +1,38 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+
+class Main{
+    public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    List<String> finallist = new ArrayList<>();
+    boolean a = true;
+    while(true){
+        String str = sc.nextLine();
+        if(str.equals("0")){
+            break;
+        }else{
+            for(int i = 0;i<str.length();i++){
+                char Stringg = str.charAt(i);
+                char Stringgg = str.charAt(str.length()-i-1);
+                if(Stringg==Stringgg){
+                    a = true;
+                    continue;
+                }else{
+                    a = false;
+                    break;
+                }
+            }
+            if(a){
+                finallist.add("yes");
+            }else{
+                finallist.add("no");
+            }
+        }
+    }
+    for(String list : finallist){
+        System.out.println(list);
+    }
+    }
+}
