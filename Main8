@@ -1,0 +1,69 @@
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
+
+
+
+class Main{
+    public static void main(String[] args){
+        boolean boo = true;
+        int pocketlist = 0;
+        int userchance = 0;
+        List<String> alllist = new ArrayList<>();
+        List<String> finallist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        
+        String[] word = str.split(" ");
+        int a = Integer.parseInt(word[0]);
+        a = pocketlist;
+        int b = Integer.parseInt(word[1]);
+        b = userchance;
+        while(true){
+            String pocketmon = sc.nextLine();
+            if(pocketlist==0){
+                break;
+            }else{
+                alllist.add(pocketmon);
+                pocketlist = pocketlist - 1;
+                
+            }
+        }
+        while(true){
+            String inputpocket = sc.nextLine();
+            if(userchance==0){
+                for(String listtt : finallist){
+                    System.out.println(listtt);
+                }
+                break;
+            }else{
+                for(int i=0;i<inputpocket.length();i++){
+                    char strr = inputpocket.charAt(i);
+                    if(Character.isDigit(strr) == true){
+                    boo = true;
+                    }else{
+                    boo = false;
+                    }
+                }
+        if(boo==true){
+            for(int j = 0;j<alllist.size();j++){
+                String checking = alllist[j];
+                if(inputpocket.equals(checking)){
+                    String u = Integer.toString(j+1);
+                    finallist.add(u);
+                }
+            }
+        }else if(boo==false){
+            int uk = Integer.parseInt(inputpocket)+1;
+            String ukd = Integer.toString(uk);
+                finallist.add(ukd);
+            }
+            userchance = userchance - 1;   
+                
+            }
+        }
+  }
+        
+}
+         
