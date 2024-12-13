@@ -29,43 +29,111 @@ class Main{
                 
             }
         }
-        System.out.println("Middle check"+userchance);
         while(true){
-            String inputpocket = sc.nextLine();
-                for(int i=0;i<inputpocket.length();i++){
-                    char strr = inputpocket.charAt(i);
-                    if(Character.isDigit(strr) == true){
-                    boo = true;
-                    }else{
-                    boo = false;
+            if(userchance==0){
+                for(String listff : finallist){
+                    System.out.println(listff);
+                }
+                break;
+            }else{
+                String useranswer = sc.nextLine();
+                try{
+                    int userint = Integer.parseInt(useranswer);
+                    String userstring = alllist.get(userint-1);
+                    finallist.add(userstring);
+                    userchance = userchance - 1;
+                }catch(Exception e) {
+                    for(int j = 0;j<alllist.size();j++){
+                        if(useranswer.equals(alllist.get(j))){
+                            String u = Integer.toString(j+1);
+                            finallist.add(u);
+                            userchance = userchance - 1;
+                        }
                     }
                 }
-        System.out.println(boo);    
-        if(boo==true){
-            for(int j = 0;j<alllist.size();j++){
-                String checking = alllist.get(j);
-                if(inputpocket.equals(checking)){
-                    String u = Integer.toString(j+1);
-                    finallist.add(u);
-                    userchance = userchance - 1;
+            
+            }
+
+        }
+        }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int pocketlist = 0;
+        int userchance = 0;
+        
+        // 입력 받기
+        String str = sc.nextLine();
+        String[] word = str.split(" ");
+        pocketlist = Integer.parseInt(word[0]);
+        userchance = Integer.parseInt(word[1]);
+        
+        // 각 포켓몬과 그에 대응하는 번호를 저장하는 리스트와 맵
+        List<String> alllist = new ArrayList<>();
+        HashMap<String, Integer> pocketMap = new HashMap<>();
+        
+        // 포켓몬 리스트 받기
+        for (int i = 0; i < pocketlist; i++) {
+            String pocketmon = sc.nextLine();
+            alllist.add(pocketmon);
+            pocketMap.put(pocketmon, i);  // 포켓몬 이름을 키로, 인덱스를 값으로 저장
+        }
+        
+        // 사용자가 입력할 기회가 있을 때마다 처리
+        List<String> finallist = new ArrayList<>();
+        
+        while (userchance > 0) {
+            String useranswer = sc.nextLine();
+            
+            try {
+                // 사용자가 숫자를 입력했을 경우
+                int userint = Integer.parseInt(useranswer);
+                if (userint >= 1 && userint <= alllist.size()) {
+                    String userstring = alllist.get(userint - 1);
+                    finallist.add(userstring);
+                    userchance--;
                 }
-                
-            }
-        }else if(boo==false){
-            int uk = Integer.parseInt(inputpocket)+1;
-            String ukd = alllist.get(uk);
-                finallist.add(ukd);
-                userchance = userchance - 1;
-            }
-        if(userchance==0){
-            for(String megg : finallist){
-                System.out.println(megg);
-            }
-        }else{
-            continue;
-        }    
-               
-                
+            } catch (NumberFormatException e) {
+                // 사용자가 문자열을 입력했을 경우
+                if (pocketMap.containsKey(useranswer)) {
+                    int index = pocketMap.get(useranswer);
+                    finallist.add(Integer.toString(index + 1));
+                    userchance--;
+                }
             }
         }
+
+        // 최종 출력
+        for (String result : finallist) {
+            System.out.println(result);
         }
+        
+        sc.close();
+    }
+}
+
