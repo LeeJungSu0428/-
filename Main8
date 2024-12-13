@@ -20,23 +20,18 @@ class Main{
         userchance = Integer.parseInt(word[1]);
 
         while(true){
-            String pocketmon = sc.nextLine();
             if(pocketlist==0){
                 break;
             }else{
+                String pocketmon = sc.nextLine();
                 alllist.add(pocketmon);
                 pocketlist = pocketlist - 1;
                 
             }
         }
+        System.out.println("Middle check"+userchance);
         while(true){
             String inputpocket = sc.nextLine();
-            if(userchance==0){
-                for(String listtt : finallist){
-                    System.out.println(listtt);
-                }
-                break;
-            }else{
                 for(int i=0;i<inputpocket.length();i++){
                     char strr = inputpocket.charAt(i);
                     if(Character.isDigit(strr) == true){
@@ -45,23 +40,32 @@ class Main{
                     boo = false;
                     }
                 }
+        System.out.println(boo);    
         if(boo==true){
             for(int j = 0;j<alllist.size();j++){
                 String checking = alllist.get(j);
                 if(inputpocket.equals(checking)){
                     String u = Integer.toString(j+1);
                     finallist.add(u);
+                    userchance = userchance - 1;
                 }
+                
             }
         }else if(boo==false){
             int uk = Integer.parseInt(inputpocket)+1;
             String ukd = alllist.get(uk);
                 finallist.add(ukd);
+                userchance = userchance - 1;
             }
-            userchance = userchance - 1;   
+        if(userchance==0){
+            for(String megg : finallist){
+                System.out.println(megg);
+            }
+        }else{
+            continue;
+        }    
+               
                 
             }
         }
-  }
-        
-}  
+        }
