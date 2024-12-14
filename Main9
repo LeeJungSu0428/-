@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int intnum = sc.nextInt();
+        String str = sc.nextLine();
+        String[] word = str.split(" ");
+        int intn = sc.nextInt();
+        try{
+        for(int j = 0;j<intnum-1;j++){
+            int compare1 = Integer.parseInt(word[j]);
+            int compare2 = Integer.parseInt(word[j+1]);
+            if(compare1<intn && intn<compare2){
+                System.out.println("The interval where intn is suit on "+j+1);
+            }
+        }
+        }catch(Exception e){
+            System.out.println("ERROR");
+        }
+    }
+}
