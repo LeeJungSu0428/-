@@ -21,12 +21,17 @@ class Main{
         numlist.add(0);
         numlist.sort(Comparator.naturalOrder());
         int intn = sc.nextInt();
+        if(intnum==1){
+            if(numlist.get(1)==intn){
+            System.out.println("0");
+            }
+        }else{
         for(int j = 0;j<intnum-1;j++){
             int compare1 = numlist.get(j);
             int compare2 = numlist.get(j+1);
             if(compare1<intn && intn<compare2){
                 intervalnum = j;
-            }else if(compare1==intn||compare2==intn){
+            }else if(compare1==intn || compare2==intn){
                 factcheck = false;
             }
         }
@@ -39,10 +44,13 @@ class Main{
         
         int finalnum = numnum*multiplynum;
         result = finalnum+multiplynum-1;
-            System.out.println(result);        
+        System.out.println(result);        
     }else{
         System.out.println("0");
     }
+    
         }
+        }
+    
          
 }
