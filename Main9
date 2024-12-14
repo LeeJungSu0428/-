@@ -1,23 +1,48 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 
 class Main{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int intnum = sc.nextInt();
+        ArrayList<Integer> numlist = new ArrayList<>();
+        int intervalnum = 0;
+        int result = 0;
+        boolean factcheck = true;
+        sc.nextLine();
         String str = sc.nextLine();
         String[] word = str.split(" ");
+        for(int k = 0;k<word.length;k++){
+            numlist.add(Integer.parseInt(word[k]));
+        }
+        numlist.add(0);
+        numlist.sort(Comparator.naturalOrder());
         int intn = sc.nextInt();
-        try{
         for(int j = 0;j<intnum-1;j++){
-            int compare1 = Integer.parseInt(word[j]);
-            int compare2 = Integer.parseInt(word[j+1]);
+            int compare1 = numlist.get(j);
+            int compare2 = numlist.get(j+1);
             if(compare1<intn && intn<compare2){
-                System.out.println("The interval where intn is suit on "+j+1);
+                intervalnum = j;
+            }else if(compare1==intn||compare2==intn){
+                factcheck = false;
             }
         }
-        }catch(Exception e){
-            System.out.println("ERROR");
-        }
+        if(factcheck){    
+        int intervalstartnum = numlist.get(intervalnum)+1;
+        int intervalfinalnum = numlist.get(intervalnum+1)-1;
+        
+        int numnum = intn-intervalstartnum;
+        int multiplynum = intervalfinalnum-intn+1;
+        
+        int finalnum = numnum*multiplynum;
+        result = finalnum+multiplynum-1;
+            System.out.println(result);        
+    }else{
+        System.out.println("0");
     }
+        }
+         
 }
