@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;  //key가 string value가 int key가 앞에거
 
 
 
@@ -10,8 +11,10 @@ class Main{
         boolean boo = true;
         int pocketlist = 0;
         int userchance = 0;
-        List<String> alllist = new ArrayList<>();
+        int k = 1;
         List<String> finallist = new ArrayList<>();
+        List<String> alllist = new ArrayList<>();
+        HashMap<String,Integer> pockethash = new HashMap<>();
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         
@@ -24,8 +27,10 @@ class Main{
                 break;
             }else{
                 String pocketmon = sc.nextLine();
+                pockethash.put(pocketmon,k);
                 alllist.add(pocketmon);
                 pocketlist = pocketlist - 1;
+                k = k+1;
                 
             }
         }
@@ -43,13 +48,10 @@ class Main{
                     finallist.add(userstring);
                     userchance = userchance - 1;
                 }catch(Exception e) {
-                    for(int j = 0;j<alllist.size();j++){
-                        if(useranswer.equals(alllist.get(j))){
-                            String u = Integer.toString(j+1);
-                            finallist.add(u);
-                            userchance = userchance - 1;
-                        }
-                    }
+                    int u = pockethash.get(useranswer);
+                    String abcd = Integer.toString(u);
+                    finallist.add(abcd);
+                    userchance = userchance - 1;
                 }
             
             }
