@@ -12,6 +12,7 @@ class Main{
         int intervalnum = 0;
         int result = 0;
         boolean factcheck = true;
+        boolean fafa = true;
         sc.nextLine();
         String str = sc.nextLine();
         String[] word = str.split(" ");
@@ -21,12 +22,20 @@ class Main{
         numlist.add(0);
         numlist.sort(Comparator.naturalOrder());
         int intn = sc.nextInt();
+        if(numlist.get(intnum)<intn){
+            fafa = false;
+            System.out.println("0");
+        }
         if(intnum==1){
             if(numlist.get(1)==intn){
             System.out.println("0");
+            fafa = false;
+            }else{
+                fafa = true;
             }
-        }else{
-        for(int j = 0;j<intnum-1;j++){
+        }
+        if(fafa){
+        for(int j = 0;j<intnum;j++){
             int compare1 = numlist.get(j);
             int compare2 = numlist.get(j+1);
             if(compare1<intn && intn<compare2){
