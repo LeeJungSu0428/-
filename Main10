@@ -101,3 +101,63 @@ public class FibonacciCount {
     }
 }
 
+
+
+
+import java.util.Scanner;
+
+public class FibonacciCount {
+    
+    // 0과 1의 개수를 저장할 배열 (0과 1이 출력되는 횟수)
+    public static int[][] dp = new int[41][2];  // 최대 N은 40
+
+    // 재귀 함수 + 메모이제이션
+    public static int[] fibonacci(int n) {
+        // 이미 계산된 값이 있으면 바로 반환
+        if (dp[n][0] != 0 || dp[n][1] != 0) {
+            return dp[n];
+        }
+        
+        // 기본값 설정
+        if (n == 0) {
+            dp[0][0] = 1;  // F(0)에서 0은 1번
+            dp[0][1] = 0;  // F(0)에서 1은 0번
+            return dp[0];
+        } else if (n == 1) {
+            dp[1][0] = 0;  // F(1)에서 0은 0번
+            dp[1][1] = 1;  // F(1)에서 1은 1번
+            return dp[1];
+        }
+
+        // F(n) = F(n-1) + F(n-2)
+        int[] prev1 = fibonacci(n - 1);
+        int[] prev2 = fibonacci(n - 2);
+
+        // 현재 값 계산
+        dp[n][0] = prev1[0] + prev2[0];  // 0의 개수
+        dp[n][1] = prev1[1] + prev2[1];  // 1의 개수
+
+        return dp[n];
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // 테스트 케이스의 개수 입력
+        int T = sc.nextInt();
+
+        // 미리 모든 피보나치 수에 대해 0과 1의 개수를 계산
+        for (int i = 0; i <= 40; i++) {
+            fibonacci(i);  // 피보나치 수와 그에 해당하는 0과 1의 개수 계산
+        }
+
+        // 각 테스트 케이스에 대해 처리
+        for (int i = 0; i < T; i++) {
+            int N = sc.nextInt();
+            // F(N)의 0과 1의 개수를 출력
+            System.out.println(dp[N][0] + " " + dp[N][1]);
+        }
+
+        sc.close();
+    }
+}
