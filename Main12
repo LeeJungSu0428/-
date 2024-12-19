@@ -1,0 +1,71 @@
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.lang.Math;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<Integer> garolist = new ArrayList<>();
+        List<Integer> serolist = new ArrayList<>();
+        List<Integer> finallist = new ArrayList<>();
+        int testcase = sc.nextInt();
+        while(true){
+            if(testcase==0){
+                for(Integer aa : finallist){
+                    System.out.println(aa);
+                }
+                break;
+            }else{
+        sc.nextLine();
+        int ghi = 0;
+        String str = sc.nextLine();
+        String word[] = str.split(" ");
+        int garo = Integer.parseInt(word[0]);
+        int sero = Integer.parseInt(word[1]);
+        int bechucount = Integer.parseInt(word[2]);
+        int[][] bechuwhici = new int[garo+2][sero+2];
+        while(true){
+            if(bechucount==0){
+                testcase = testcase - 1;
+                break;
+            }else{
+                String bechucase = sc.nextLine();
+                String bechucaseword[] = bechucase.split(" ");
+                int bechugaro = Integer.parseInt(bechucaseword[0]);
+                int bechusero = Integer.parseInt(bechucaseword[1]);
+                garolist.add(bechugaro+1);
+                serolist.add(bechusero+1);
+                bechuwhici[bechugaro+1][bechusero+1] = 1;
+                bechucount = bechucount - 1;
+            }
+        }
+            for(int i = 0;i<garolist.size()-1;i++){
+                    int garovalue = garolist.get(i);
+                    int serovalue = serolist.get(i);
+                for(int k = 1;k<garolist.size();k++){
+                    int comparegaro = garolist.get(k);
+                    int comparesero = serolist.get(k);
+                    double value = (double)Math.pow(garovalue-comparegaro,2);
+                    double value2 = (double)Math.pow(serovalue-comparesero,2);       
+                    double finalvalue = (double)Math.sqrt(value+value2);
+                    if(finalvalue==1){
+                        bechuwhici[comparegaro][comparesero] = 0;
+                    }
+                }
+            
+        }
+        for(int i = 1;i<garo+1;i++){
+            for(int j = 1;j<sero+1;j++){
+                if(bechuwhici[i][j]==1){
+                    ghi = ghi + 1;
+                }
+            }
+        }
+        finallist.add(ghi);
+        
+        
+        }
+    }
+}
+}
