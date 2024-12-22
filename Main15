@@ -1,0 +1,48 @@
+import java.util.Scanner;
+import java.lang.Math;
+import java.util.ArrayList;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Integer> finallist = new ArrayList<>();
+        int chance = sc.nextInt();
+        sc.nextLine();
+        while(true){
+            if(chance==0){
+                for(Integer aa : finallist){
+                    System.out.println(aa);
+                }
+                break;
+            }else{
+                int count = 0;
+                String str = sc.nextLine();
+                String word[] = str.split(" ");
+                int x1 = Integer.parseInt(word[0]);
+                int y1 = Integer.parseInt(word[1]);
+                int x2 = Integer.parseInt(word[2]);
+                int y2 = Integer.parseInt(word[3]);
+                int hengsungN = sc.nextInt();
+                sc.nextLine();
+                for(int i = 0;i<hengsungN;i++){
+                    String strr = sc.nextLine();
+                    String[] word2 = strr.split(" ");
+                    int cx = Integer.parseInt(word2[0]);
+                    int cy = Integer.parseInt(word2[1]);
+                    int cr = Integer.parseInt(word2[2]);
+                    double x1cx = (double)Math.pow(x1-cx,2);
+                    double y1cy = (double)Math.pow(y1-cy,2);
+                    double x2cx = (double)Math.pow(x2-cx,2);
+                    double y2cy = (double)Math.pow(y2-cy,2);
+                    double startdistance = (double)Math.sqrt(x1cx+y1cy);
+                    double enddistance = (double)Math.sqrt(x2cx+y2cy);
+                    if(startdistance<cr||enddistance<cr){
+                        count = count + 1;
+                    }
+                }
+            finallist.add(count); 
+            chance = chance - 1;
+            }
+        }
+    }
+}
