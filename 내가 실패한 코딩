@@ -1,0 +1,72 @@
+실버 2 - 유기농배추 1012번
+
+import java.util.*;
+
+public class Main {
+    
+    // 상, 하, 좌, 우 방향을 나타내는 배열
+    static int[] dx = {-1, 1, 0, 0};
+    static int[] dy = {0, 0, -1, 1};
+    
+    static int M, N, K; // 배추밭의 가로 길이, 세로 길이, 배추의 개수
+    static int[][] field; // 배추밭
+    
+    // DFS 함수로 연결된 배추를 모두 방문
+    static void dfs(int x, int y) {
+        // 배추밭을 벗어나면 종료
+        if (x < 0 || x >= M || y < 0 || y >= N) return;
+        // 이미 방문한 곳은 다시 방문하지 않음
+        if (field[x][y] == 0) return;
+        
+        // 현재 배추 방문 처리
+        field[x][y] = 0;
+        
+        // 4방향으로 DFS 탐색
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            dfs(nx, ny);
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int T = sc.nextInt(); // 테스트 케이스의 수
+        
+        // 테스트 케이스 반복
+        for (int t = 0; t < T; t++) {
+            M = sc.nextInt(); // 가로 길이
+            N = sc.nextInt(); // 세로 길이
+            K = sc.nextInt(); // 배추의 개수
+            
+            // 배추밭 초기화
+            field = new int[M][N];
+            
+            // 배추의 위치를 받아 배추밭에 표시
+            for (int i = 0; i < K; i++) {
+                int x = sc.nextInt();
+                int y = sc.nextInt();
+                field[x][y] = 1;
+            }
+            
+            int count = 0; // 필요한 배추흰지렁이의 수
+            
+            // 배추밭을 순차적으로 탐색
+            for (int i = 0; i < M; i++) {
+                for (int j = 0; j < N; j++) {
+                    // 배추가 있고, 아직 방문하지 않았다면 DFS로 연결된 배추를 모두 방문
+                    if (field[i][j] == 1) {
+                        dfs(i, j);
+                        count++; // 새로운 군집 발견 시 배추흰지렁이 한 마리 필요
+                    }
+                }
+            }
+            
+            // 결과 출력
+            System.out.println(count);
+        }
+        
+        sc.close();
+    }
+}
