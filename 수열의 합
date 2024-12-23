@@ -10,12 +10,11 @@ class Main{
         String word[] = str.split(" ");
         int N = Integer.parseInt(word[0]);
         int L = Integer.parseInt(word[1]);                          
-            for(int i = 0;i<100-L;i++){
-            if((L+i)%2==0){
-                if(N%(L+i)!=0){
-                int k = N/(L+i)*2;
+            for(int i = 0;i<101-L;i++){
+            if((L+i)%2==0){                      //짝수
+                if(N%(L+i)!=0){         // 짝수는 나누면 .5가 나와야되니깐 정수로 제외
+                double k = (double) N/(L+i)*2;
                 if(k%1==0){
-                    factcheck = true;
                     double u = (double) N/(L+i)+0.5-(L+i)/2;
                     int case1 = (int) Math.round(u);
                     total = 0;
@@ -24,26 +23,20 @@ class Main{
                         }
                     if(total==N){
                         if(case1>=0){
+                            factcheck = true;
                             for(int j = 0;j<L+i;j++){
                                 System.out.print((case1+j)+" ");
-                                                    }
-                        }else{
-                            factcheck = false;
+                                }
+                        break;
                         }
-                    break;    
                     }    
                     
-                    }else{
-                        factcheck = false;
                     }
-                }else{
-                    factcheck = false;
-                }     
+                }    
                 
-            }else{
+            }else{                        //홀수
                 int q = N/(L+i);
                 if(q%1==0){
-                    factcheck = true;
                     double w = q - (L+i-1)/2;
                     int case2 = (int) Math.round(w);
                     total = 0;
@@ -52,22 +45,19 @@ class Main{
                         }
                     if(total==N){
                         if(case2>=0){
+                            factcheck = true;
                             for(int j = 0;j<L+i;j++){
                                 System.out.print((case2+j)+" ");
                                                     }
-                        }else{
-                            factcheck = false;
+                            break;
                         }
-                        break;
-                    }else{
-                    factcheck = false;
-                    }    
-                }else{
-                    factcheck = false;
+            
+                    }  
+                }
                 }
                 
-            }
         }
+        
         if(factcheck == false){
             System.out.println("-1");
         }
