@@ -1,0 +1,78 @@
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+
+        
+
+
+static int node, start, line;
+
+static Queue<Integer> q = new LinkedList<>();
+
+
+
+class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        String word[] = str.split(" ");
+        int node = Integer.parseInt(word[0]);
+        int line = Integer.parseInt(word[1]);
+        int start = Integer.parseInt(word[2]);
+        
+        static int graph[][] = new int[node+1][node+1];
+        static boolean[] visit = new boolean[node+1];
+        
+        for(int t = 0;t<line; t++){
+            String lineline = sc.nextLine();
+            String worrd[] = lineline.split(" ");
+            int abc = Integer.parseInt(worrd[0]);
+            int abcd = Integer.parseInt(worrd[1]);
+            graph[abc][abcd] = 1;
+        }
+        
+        dfs(start);
+        visit = new boolean[node+1];
+        bfs(start);
+        
+        
+    }
+}
+
+
+class dfs{
+    void dfs(int v){
+        visit1[v] = true;
+        System.out.printf(v+" ");
+        
+        for(int i = 1;i<node+1;i++){
+            if(graph1[v][i]==1 ||visit1[i] = false){
+                dfs(i);
+            }
+        }
+    }
+}
+
+class bfs{
+    void bfs(int u){
+        visit2[u] = true;
+        q.add(u);
+        System.out.printf(u+" ");
+        
+        while(!q.isEmpty()){
+            
+            start = q.poll();
+            System.out.printf(start+" ");
+            
+            for(int j = 1;j<node+1;j++){
+                if(graph[start][j]==1||visit2[j]==false){
+                    q.add[j];
+                    visit2[j] = true;
+                }
+            }
+        }
+        
+        
+    }
+}
