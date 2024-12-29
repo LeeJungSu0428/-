@@ -1,45 +1,128 @@
 import java.util.Scanner;
-
+import java.util.LinkedList;
+import java.util.Deque;
 
 
 class Main {
+    
+        static Deque<Character> mainlist = new LinkedList<>();
+        static Deque<Character> sublist = new LinkedList<>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String line = sc.nextLine();
-        StringBuffer sb = new StringBuffer(line);
+        for(int k = 0;k<line.length();k++){
+            mainlist.add(line.charAt(k));
+        }
         int chance = sc.nextInt();
-        int linedex = line.length();
         sc.nextLine();
         while(true){
             if(chance==0){
-                System.out.println(sb.toString());
+                while(!sublist.isEmpty()){
+                    char lastlast = sublist.pollLast();
+                    mainlist.add(lastlast);
+                }
+                for(char namee : mainlist){
+                    System.out.print(namee);
+                }
                 break;
             }else{
              String edit = sc.nextLine();
              if(edit.equals("L")){
-                 if(linedex>0){
-                 linedex = linedex - 1;
-                 }
+                 L();
              }else if(edit.equals("D")){
-                 if(linedex<sb.length()){
-                     linedex = linedex + 1;
-                 }
+                D();
              }else if(edit.equals("B")){
-                 if(linedex>0){
-                     sb.deleteCharAt(linedex-1);
-                     linedex = linedex - 1;
-                 }
+                 B();
                  
              }else{
-                 String word[] = edit.split(" ");
-                 sb.insert(linedex, word[1]);
-                 linedex = linedex + 1;
+                 char putedit = edit.charAt(2);
+                 mainlist.add(putedit);
                  
              }
             }
             
         chance = chance - 1;
         }
+    }    
         
+    private static void L(){
+        if(mainlist.isEmpty() == false){
+        char code = mainlist.pollLast();
+        sublist.add(code);
+        }
+    }
+    private static void D(){
+        char code2 = sublist.pollLast();
+        mainlist.add(code2);
+        
+    }
+    private static void B(){
+        if(mainlist.isEmpty() == false){
+        mainlist.removeLast();
+        }
+    }
+    private static void P(Character name){
+        mainlist.add(name);
+    }
+        
+    
+}
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+
+
+import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String line = sc.nextLine();
+        int chance = sc.nextInt();
+        sc.nextLine(); // 버퍼 비우기
+        
+        // mainlist는 문자열을 그대로 저장하고, 커서를 사용하여 편집
+        LinkedList<Character> mainlist = new LinkedList<>();
+        for (int i = 0; i < line.length(); i++) {
+            mainlist.add(line.charAt(i));
+        }
+        
+        // 커서를 mainlist의 끝에 놓음
+        ListIterator<Character> cursor = mainlist.listIterator(mainlist.size());
+        
+        while (chance > 0) {
+            String edit = sc.nextLine();
+            
+            if (edit.equals("L")) {
+                if (cursor.hasPrevious()) {
+                    cursor.previous();
+                }
+            } else if (edit.equals("D")) {
+                if (cursor.hasNext()) {
+                    cursor.next();
+                }
+            } else if (edit.equals("B")) {
+                if (cursor.hasPrevious()) {
+                    cursor.previous();
+                    cursor.remove();
+                }
+            } else { // P 명령
+                char putedit = edit.charAt(2);
+                cursor.add(putedit);
+            }
+
+            chance--;
+        }
+        
+        // 결과 출력
+        for (char c : mainlist) {
+            System.out.print(c);
+        }
     }
 }
