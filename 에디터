@@ -126,3 +126,99 @@ class Main {
         }
     }
 }
+
+
+
+-------------------------------------------------------------------------------------------------
+
+import java.util.LinkedList;
+import java.util.Deque;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
+
+class Main {
+    static Deque<Character> mainlist = new LinkedList<>();
+    static Deque<Character> sublist = new LinkedList<>();
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+        
+        // 첫 번째 입력 받기: 초기 문자열
+        String line = reader.readLine();
+        for (int k = 0; k < line.length(); k++) {
+            mainlist.add(line.charAt(k));
+        }
+        
+        // 두 번째 입력 받기: 기회 횟수
+        int chance = Integer.parseInt(reader.readLine());
+        
+        while (true) {
+            if (chance == 0) {
+                // 기회가 다 소진된 후, sublist의 내용물들을 mainlist로 다시 옮긴다.
+                while (!sublist.isEmpty()) {
+                    char lastlast = sublist.pollLast();
+                    mainlist.add(lastlast);
+                }
+                // mainlist의 모든 문자를 출력한다.
+                for (char namee : mainlist) {
+                    writer.write(namee);
+                }
+                break;
+            } else {
+                // edit 명령어 받기
+                String edit = reader.readLine();
+                
+                // 커맨드 처리
+                if (edit.equals("L")) {
+                    L();
+                } else if (edit.equals("D")) {
+                    D();
+                } else if (edit.equals("B")) {
+                    B();
+                } else {
+                    // "P" 명령은 'P x' 형태로 오므로, 길이가 적어도 3이어야 한다.
+                    if (edit.length() >= 3) {
+                        char putedit = edit.charAt(2); // 세 번째 문자를 삽입
+                        mainlist.add(putedit);
+                    }
+                }
+            }
+            chance = chance - 1;
+        }
+        
+        reader.close();
+        writer.close();
+    }
+
+    // L: mainlist에서 가장 마지막 문자 꺼내서 sublist에 추가
+    private static void L() {
+        if (!mainlist.isEmpty()) {
+            char code = mainlist.pollLast();
+            sublist.add(code);
+        }
+    }
+
+    // D: sublist에서 가장 마지막 문자 꺼내서 mainlist에 추가
+    private static void D() {
+        if (!sublist.isEmpty()) {
+            char code2 = sublist.pollLast();
+            mainlist.add(code2);
+        }
+    }
+
+    // B: mainlist에서 가장 마지막 문자 제거
+    private static void B() {
+        if (!mainlist.isEmpty()) {
+            mainlist.removeLast();
+        }
+    }
+
+    // P: 주어진 문자를 mainlist에 추가하는 메서드
+    private static void P(Character name) {
+        mainlist.add(name);
+    }
+}
