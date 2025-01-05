@@ -1,0 +1,47 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.io.IOException;
+
+
+class Main {
+    public static void main(String[] args) throws IOException {
+        HashMap<Integer, String> mainmap = new HashMap<>();
+        HashMap<Integer, String> submap = new HashMap<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+        int N = Integer.parseInt(reader.readLine());
+        int outputs  = 0;
+        int para1 = 0;
+        for(int j = 1;j<N+1;j++){
+            String line = reader.readLine();
+            mainmap.put(j,line);
+        }
+        for(int u = 1;u<N+1;u++){
+            String line = reader.readLine();
+            submap.put(u,line);
+        }
+        
+        for(int k = 1;k<N+1;k++){
+           if((submap.get(k)).equals(mainmap.get(k))){
+               continue;
+           }else{
+               String para = submap.get(k);
+               for(int q = 1;q<mainmap.size()+1;q++){
+                   if((mainmap.get(q)).equals(para)){
+                       para1 = q;
+                       break;
+                   }
+               }
+               if(k<para1){
+                   outputs = outputs + 1;
+               }
+           }     
+        }
+        
+        System.out.println(outputs);
+        
+    }
+}
