@@ -37,10 +37,15 @@ class Main {
                }
                if(k<para1){
                    outputs = outputs + 1;
-               }
+                   for(int w = 0;w<para1-k;w++){
+                       String w2 = mainmap.get(para1-w-1);
+                       mainmap.replace(para1-w, w2);
+                       
+                   }
+                mainmap.replace(k, para);
            }     
         }
-        
+    }     
         System.out.println(outputs);
         
     }
