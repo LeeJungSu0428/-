@@ -73,3 +73,89 @@ class Main {
     
     }
 }
+
+
+
+============================================================================================================================================
+import java.util.Scanner;
+
+class Main {
+    static int dp[][];  // dp 배열을 정의하여 값을 저장
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = Integer.parseInt(sc.nextLine());
+        
+        dp = new int[N][3];  // 두 번째 차원을 3으로 설정 (세 가지 값을 저장)
+        
+        // 입력을 받아 dp 배열에 저장
+        for(int j = 0; j < N; j++) {
+            String str = sc.nextLine();
+            String word[] = str.split(" ");
+            dp[j][0] = Integer.parseInt(word[0]);
+            dp[j][1] = Integer.parseInt(word[1]);
+            dp[j][2] = Integer.parseInt(word[2]);
+        }
+        
+        dpdp(N);  // dpdp 메서드 호출
+        
+        // numfinal1, numfinal2, numfinal3 중 최소값을 출력
+        int abc = Math.min(Math.min(lista[0], lista[1]), lista[2]);
+        System.out.println(abc);
+    }
+    
+    // numfinal1, numfinal2, numfinal3를 메서드 밖에서 선언
+    static int numfinal1 = 0, numfinal2 = 0, numfinal3 = 0;
+    static int[] lista;
+    
+    static void dpdp(int n) {
+        lista = new int[3];
+        int chance = 1;
+        int road = 0;  // 시작은 road 0
+        int array = 1; // dp 배열의 인덱스
+        numfinal1 = dp[0][0];
+        numfinal2 = dp[0][1];
+        numfinal3 = dp[0][2];
+        
+        // 모든 단계를 끝낼 때까지 반복
+    for(int j =0;j<3;j++){
+        road = j;
+        int num = dp[0][j];
+        while (chance < n) {
+            if (road == 0) {
+                // road 0에서 dp[array][1]과 dp[array][2] 중 작은 값을 선택
+                if (dp[array][1] < dp[array][2]) {
+                    num += dp[array][1];
+                    road = 1;  // 다음에는 road 1로 변경
+                } else {
+                    num += dp[array][2];
+                    road = 2;  // 다음에는 road 2로 변경
+                }
+            } else if (road == 1) {
+                // road 1에서 dp[array][0]과 dp[array][2] 중 작은 값을 선택
+                if (dp[array][0] < dp[array][2]) {
+                    num += dp[array][0];
+                    road = 0;  // 다음에는 road 0으로 변경
+                } else {
+                    num += dp[array][2];
+                    road = 2;  // 다음에는 road 2로 변경
+                }
+            } else if (road == 2) {
+                // road 2에서 dp[array][0]과 dp[array][1] 중 작은 값을 선택
+                if (dp[array][0] < dp[array][1]) {
+                    num += dp[array][0];
+                    road = 0;  // 다음에는 road 0으로 변경
+                } else {
+                    num += dp[array][1];
+                    road = 1;  // 다음에는 road 1로 변경
+                }
+            }
+            
+            chance++; // chance를 증가시켜서 다음 단계로 이동
+            array++;  // dp 배열에서 다음 인덱스로 이동
+        }
+        lista[j] = num;
+    }
+    }
+}
+
