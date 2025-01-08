@@ -1,0 +1,75 @@
+import java.util.Scanner;
+import java.lang.Math;
+
+
+class Main {
+    static int dp[][];
+    public static void main(String[] args) {
+        Scanne sc = new Scanner(System.in);
+        int N = Integer.parseInt(sc.nextLine());
+        dp[][] = new int[N+1][2];
+        for(int j = 0;j<N;j++){
+            String str = sc.nextLine();
+            String word[] = str.split(" ");
+            dp[j][0] = Integer.parseInt(word[0]);
+            dp[j][1] = Integer.parseInt(word[1]);
+            dp[j][2] = Integer.parseInt(word[2]);
+        }
+        
+    dpdp(N);
+    int abc = Math.min(Math.min(numfinal1,numfinal2),numfinal3);
+    System.out.println(abc);
+    }
+    
+    
+    
+    
+    static void dpdp(int n){
+    while(true){
+        int road = 0;
+        int array = 0;
+        int chance = 0;
+        static int numfinal1 = 0;
+        static int numfinal2 = 0;
+        static int numfinal3 = 0;
+    if(chance!==n){
+        if(road==0){
+         if(dp[array][1]<dp[array][2]){
+         numfinal1 = numfinal1 + dp[array][1];
+         road = 1;
+        }else{
+         numfinal1 = numfinal1 + dp[array][2]; 
+         road = 2;
+        }
+    chance = chance + 1;    
+    }
+        if(road==1){
+         if(dp[array][0]<dp[array][2]){
+         numfinal2 = numfinal2 + dp[array][0];
+         road = 0;
+        }else{
+         numfinal2 = numfinal2 + dp[array][2]; 
+         road = 2;
+        }
+        chance = chance + 1;
+    }
+    
+        if(road==2){
+         if(dp[array][0]<dp[array][1]){
+         numfinal3 = numfinal3 + dp[array][0];
+         road = 0;
+        }else{
+         numfinal3 = numfinal3 + dp[array][1]; 
+         road = 1;
+        }
+        chance = chance + 1;
+    }
+    
+    }else{
+        break;
+    } 
+    }
+    
+    
+    }
+}
