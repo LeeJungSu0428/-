@@ -229,3 +229,48 @@ class Main {
         }
     }
 }
+
+
+
+
+================================================================================================
+
+import java.util.Scanner;
+
+class Main {
+    
+    static int[][] dp;
+    static int[][] dpfinal;
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = Integer.parseInt(sc.nextLine());
+        dp = new int[N][3];
+        dpfinal = new int[N][3];
+        
+        for(int j = 0;j<N;j++){
+            String str = sc.nextLine();
+            String word[] = str.split(" ");
+            dp[j][0] = Integer.parseInt(word[0]);
+            dp[j][1] = Integer.parseInt(word[1]);
+            dp[j][2] = Integer.parseInt(word[2]);
+        }
+        dpfinal[0][0] = dp[0][0];
+        dpfinal[0][1] = dp[0][1];
+        dpfinal[0][2] = dp[0][2];
+        
+        
+        dpdp(N);
+        int u = Math.min((dpfinal[N-1][2]),Math.min(dpfinal[N-1][0],dpfinal[N-1][1]));
+        System.out.println(u);
+    }
+    
+    
+    static void dpdp(int n){
+        for(int i = 1;i<n;i++){
+            dpfinal[i][0] = Math.min(dpfinal[i-1][1],dpfinal[i-1][2]) + dp[i][0];
+            dpfinal[i][1] = Math.min(dpfinal[i-1][0],dpfinal[i-1][2]) + dp[i][1];
+            dpfinal[i][2] = Math.min(dpfinal[i-1][0],dpfinal[i-1][1]) + dp[i][2];
+        }   
+    }
+}
