@@ -159,3 +159,73 @@ class Main {
     }
 }
 
+=====================================================================================================
+
+import java.util.Scanner;
+
+class Main {
+    static int dp[][];  // dp 배열을 정의하여 값을 저장
+    static int lista[]; // 결과를 저장할 배열
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = Integer.parseInt(sc.nextLine());
+        
+        dp = new int[N][3];  // 두 번째 차원을 3으로 설정 (세 가지 값을 저장)
+        
+        // 입력을 받아 dp 배열에 저장
+        for(int j = 0; j < N; j++) {
+            String str = sc.nextLine();
+            String word[] = str.split(" ");
+            dp[j][0] = Integer.parseInt(word[0]);
+            dp[j][1] = Integer.parseInt(word[1]);
+            dp[j][2] = Integer.parseInt(word[2]);
+        }
+        
+        lista = new int[3];  // 결과를 저장할 배열을 크기 3으로 할당
+        dpdp(N);  // dpdp 메서드 호출
+        
+        int abc = Math.min(Math.min(lista[0], lista[1]), lista[2]);
+        System.out.println(abc);
+    }
+    
+    static void dpdp(int n) {
+        for (int j = 0; j < 3; j++) {
+            int num = dp[0][j]; // 첫 번째 집에서 j번째 색 선택
+            int road = j;  // 현재 도로를 설정 (0, 1, 2)
+            
+            // 각 단계별로 선택하여 최소값을 계산
+            for (int i = 1; i < n; i++) {
+                if (road == 0) {
+                    // road 0에서 dp[i][1]과 dp[i][2] 중 작은 값을 선택
+                    if (dp[i][1] < dp[i][2]) {
+                        num += dp[i][1];
+                        road = 1;
+                    } else {
+                        num += dp[i][2];
+                        road = 2;
+                    }
+                } else if (road == 1) {
+                    // road 1에서 dp[i][0]과 dp[i][2] 중 작은 값을 선택
+                    if (dp[i][0] < dp[i][2]) {
+                        num += dp[i][0];
+                        road = 0;
+                    } else {
+                        num += dp[i][2];
+                        road = 2;
+                    }
+                } else if (road == 2) {
+                    // road 2에서 dp[i][0]과 dp[i][1] 중 작은 값을 선택
+                    if (dp[i][0] < dp[i][1]) {
+                        num += dp[i][0];
+                        road = 0;
+                    } else {
+                        num += dp[i][1];
+                        road = 1;
+                    }
+                }
+            }
+            lista[j] = num;  // j번째 색으로 시작한 최소 비용을 저장
+        }
+    }
+}
