@@ -1,18 +1,23 @@
 import java.util.Scanner;
-import java.util
+import java.util.ArrayList;
+import java.util.Arrays;
 
 class Main {
     static int N;
     static int chance;
+    static boolean visit[];
+    static int[][] graph;
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        ArrayList<Integer> finalist = new ArrayList<>();
+        ArrayList<Integer> result = new ArrayList<>();
         String str = sc.nextLine();
         String[] word = str.split(" ");
         int N = Integer.parseInt(word[0]);
         int M = Integer.parseInt(word[1]);
-        int[][] graph = new int[N+1][N+1];
-        boolean visit[N] = false;
+        graph = new int[N+1][N+1];
+        boolean visit[] = new boolean[N+1];
         for(int i = 0;i<M;i++){
             String strr = sc.nextLine();
             String word2[] = strr.split(" ");
@@ -22,13 +27,24 @@ class Main {
             graph[node2][node1] = 1;
         }
         
-        int[] finallist = new int[N];
-        for(int j = 1;j<N+1;j++){
+        finalist.add(0);
+        for(static int j = 1;j<N+1;j++){
             dfs(j);
-            Haspmap
-            for(int q = 1;q<N+1;q++){
-                visit[q] = false;
+            if(chance>finalist.get(0)){
+                finalist.clear();
+                result.clear();
+                finalist.add(chance);
+                result.add(j);
+            }else if(chance==finalist.get(0)){
+                result.add(j);
             }
+            
+            Arrays.fill(visit,false);
+            chance = 0;
+        }
+        
+        for(Integer strr : result){
+            System.out.print(strr+" ");
         }
         
         
@@ -36,10 +52,10 @@ class Main {
     }
     
     static void dfs(int n){
-        for(int u = 1;u<N+1;u++){
+        for(int u = j;u<N+1;u++){
             if(visit[u] == false && graph[n][u] == 1){
                 chance = chance + 1;
-                visit[u] == true;
+                visit[u] = true;
                 dfs(u);
             }
         }
