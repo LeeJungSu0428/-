@@ -1,68 +1,60 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 class Main {
     static int N;
     static int chance;
     static boolean visit[];
     static int[][] graph;
-    
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> finalist = new ArrayList<>();
         ArrayList<Integer> resulta = new ArrayList<>();
         String str = sc.nextLine();
         String[] word = str.split(" ");
-        int N = Integer.parseInt(word[0]);
+        N = Integer.parseInt(word[0]); // 전역 변수 N에 값을 저장
         int M = Integer.parseInt(word[1]);
-        graph = new int[N+1][N+1];
-        boolean visit[] = new boolean[N+1];
-        for(int i = 0;i<M;i++){
+        graph = new int[N + 1][N + 1];
+        visit = new boolean[N + 1]; // 전역 변수 visit 초기화
+
+        // 그래프 입력
+        for (int i = 0; i < M; i++) {
             String strr = sc.nextLine();
             String word2[] = strr.split(" ");
             int node1 = Integer.parseInt(word2[0]);
             int node2 = Integer.parseInt(word2[1]);
             graph[node1][node2] = 1;
         }
-        
+
         finalist.add(0);
-        for(int j = 1;j<N+1;j++){
+        for (int j = 1; j < N + 1; j++) {
             chance = 0;
+            visit = new boolean[N + 1]; // 방문 배열 초기화
             dfs(j);
-            if(chance>finalist.get(0)){
+            if (chance > finalist.get(0)) {
                 finalist.clear();
                 resulta.clear();
                 finalist.add(chance);
                 resulta.add(j);
-            }else if(chance==finalist.get(0)){
+            } else if (chance == finalist.get(0)) {
                 resulta.add(j);
             }
-            
         }
-        
-        for(Integer strr : resulta){
-            System.out.print(strr+" ");
-        }
-        
-        
-            
-    }        
-        
-        
-            
-    
-    
 
-static void dfs(int n){
+        // 결과 출력
+        for (Integer strr : resulta) {
+            System.out.print(strr + " ");
+        }
+    }
+
+    static void dfs(int n) {
         visit[n] = true;
-        for(int u = 1;u<N+1;u++){
-            if(visit[u] == false && graph[u][n] == 1){
-                chance = chance + 1;
+        for (int u = 1; u < N + 1; u++) {
+            if (!visit[u] && graph[u][n] == 1) {
+                chance++;
                 dfs(u);
-                System.out.println("visit"+u);
             }
         }
-        
     }
 }
