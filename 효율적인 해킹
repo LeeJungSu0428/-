@@ -11,7 +11,7 @@ class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> finalist = new ArrayList<>();
-        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Integer> resulta = new ArrayList<>();
         String str = sc.nextLine();
         String[] word = str.split(" ");
         int N = Integer.parseInt(word[0]);
@@ -24,39 +24,43 @@ class Main {
             int node1 = Integer.parseInt(word2[0]);
             int node2 = Integer.parseInt(word2[1]);
             graph[node1][node2] = 1;
-            graph[node2][node1] = 1;
         }
         
         finalist.add(0);
-        for(static int j = 1;j<N+1;j++){
+        for(int j = 1;j<N+1;j++){
+            chance = 0;
             dfs(j);
             if(chance>finalist.get(0)){
                 finalist.clear();
-                result.clear();
+                resulta.clear();
                 finalist.add(chance);
-                result.add(j);
+                resulta.add(j);
             }else if(chance==finalist.get(0)){
-                result.add(j);
+                resulta.add(j);
             }
             
-            Arrays.fill(visit,false);
-            chance = 0;
         }
         
-        for(Integer strr : result){
+        for(Integer strr : resulta){
             System.out.print(strr+" ");
         }
         
         
             
-    }
+    }        
+        
+        
+            
     
-    static void dfs(int n){
-        for(int u = j;u<N+1;u++){
-            if(visit[u] == false && graph[n][u] == 1){
+    
+
+static void dfs(int n){
+        visit[n] = true;
+        for(int u = 1;u<N+1;u++){
+            if(visit[u] == false && graph[u][n] == 1){
                 chance = chance + 1;
-                visit[u] = true;
                 dfs(u);
+                System.out.println("visit"+u);
             }
         }
         
