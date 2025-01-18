@@ -131,3 +131,75 @@ static void dfs(int n){
         
     }
 }
+
+
+------------------------------------------------------------------------------------
+
+import java.io.*;
+import java.util.*;
+
+class Main {
+    static int N;
+    static int chance;
+    static boolean visit[];
+    static ArrayList<Integer>[] graph;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        Queue<Integer> q = new LinkedList<>();
+        ArrayList<Integer> finalist = new ArrayList<>();
+        ArrayList<Integer> resulta = new ArrayList<>();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken()); // 전역 변수 N에 값을 저장
+        int M = Integer.parseInt(st.nextToken());
+        graph = new ArrayList[N + 1];
+        
+        
+        for (int i = 1; i <= N; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        
+        
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());   
+            int b = Integer.parseInt(st.nextToken()); 
+            graph[b].add(a);
+        }
+
+        finalist.add(0);
+        for (int j = 1; j < N + 1; j++) {
+            chance = 0;
+            visit = new boolean[N + 1]; // 방문 배열 초기화
+            visit[j] = true;
+            q.add(j);
+        
+            while(!q.isEmpty()){
+                int start = q.poll();
+                for(int abcd : graph[start]){
+                    if(!visit[abcd]){
+                        chance++;
+                        q.add(abcd);
+                        visit[abcd] = true;
+            }
+        }
+    }
+            if (chance > finalist.get(0)) {
+                finalist.clear();
+                resulta.clear();
+                finalist.add(chance);
+                resulta.add(j);
+            } else if (chance == finalist.get(0)) {
+                resulta.add(j);
+            }
+        }
+
+        // 결과 출력
+        for (Integer strr : resulta) {
+            bw.write(strr+" ");
+        }
+        bw.close();
+    }
+} 
+
