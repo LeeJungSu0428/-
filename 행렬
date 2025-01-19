@@ -97,3 +97,99 @@ private static void solution(int x, int y){
     }
 
 }
+
+
+
+
+------------------------------------------------------------------------------------------------------
+
+import java.util.*;
+import java.io.*;
+
+class Main {
+    static int[][] graphA;
+    static int[][] graphB;
+    static int chance, N, M;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        M = sc.nextInt();
+        sc.nextLine(); // 버퍼를 비우기
+
+        graphA = new int[N + 1][M + 1];
+        graphB = new int[N + 1][M + 1];
+
+        // graphA 입력 받기
+        for (int i = 1; i <= N; i++) {
+            String str = sc.nextLine();
+            for (int j = 1; j <= M; j++) {
+                graphA[i][j] = Integer.parseInt(String.valueOf(str.charAt(j - 1)));
+            }
+        }
+
+        // graphB 입력 받기
+        for (int i = 1; i <= N; i++) {
+            String str = sc.nextLine();
+            for (int j = 1; j <= M; j++) {
+                graphB[i][j] = Integer.parseInt(String.valueOf(str.charAt(j - 1)));
+            }
+        }
+
+        if (N < 3 || M < 3) {
+            if (!Compare()) {
+                System.out.println("-1");
+            } else {
+                System.out.println("0");
+            }
+        } else {
+            chance = 0;
+            solution(1, 1);
+
+            // Compare()가 true일 때만 출력
+            if (!Compare()) {
+                System.out.println("-1");
+            } else {
+                System.out.println(chance);
+            }
+        }
+    }
+
+    // graphA와 graphB 비교
+    private static boolean Compare() {
+        for (int a = 1; a <= N; a++) {
+            for (int b = 1; b <= M; b++) {
+                if (graphA[a][b] != graphB[a][b]) {
+                    return false; // 다르면 false 반환
+                }
+            }
+        }
+        return true; // 모두 같으면 true 반환
+    }
+
+    // 3x3 영역을 뒤집는 작업
+    private static void solution(int x, int y) {
+        // x, y가 3x3 영역을 뒤집을 수 있는 범위 내에 있으면 뒤집기
+        if (x + 2 > N || y + 2 > M) {
+            return;
+        }
+
+        // graphA와 graphB가 다르면 3x3 영역을 뒤집기
+        if (graphA[x][y] != graphB[x][y]) {
+            chance++;
+            for (int u = x; u < x + 3; u++) {
+                for (int k = y; k < y + 3; k++) {
+                    graphA[u][k] = (graphA[u][k] == 0) ? 1 : 0; // 0이면 1로, 1이면 0으로 뒤집기
+                }
+            }
+        }
+
+        // 다음 x, y로 재귀 호출
+        if (y + 1 <= M - 2) {
+            solution(x, y + 1); // y를 먼저 증가시키기
+        } else if (x + 1 <= N - 2) {
+            solution(x + 1, 1); // x를 증가시키고 y는 1로 초기화
+        }
+    }
+}
+
