@@ -7,8 +7,7 @@ class Main {
     static int chance, N, M;
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();  
-        int M = sc.nextInt();  
+        int N = sc.nextInt();     - 지역변수 활용 이 변수들은 main 메서드 안에서만 유효함 정말정말 중요
         boolean factcheck = false;
         graphA = new int[N+1][M+1]; 
         graphB = new int[N+1][M+1]; 
