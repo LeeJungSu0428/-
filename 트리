@@ -71,3 +71,80 @@ class Main {
         }
     }
 }
+
+
+---------------------------------------------------------------------
+
+
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+class Main {
+    static int graph[][], N;
+    static boolean visit[];
+    static Queue<Integer> q = new LinkedList<>();
+    static ArrayList<Integer> finallist = new ArrayList<>();
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        N = sc.nextInt();  // 정점의 개수
+        sc.nextLine();  // 개행 문자 처리
+        
+        graph = new int[N][N];  // 그래프 초기화
+        visit = new boolean[N];  // 방문 여부 초기화
+        
+        int topnode = -1;
+        
+        String str = sc.nextLine();  // 부모 노드들에 대한 입력
+        String[] word = str.split(" ");
+        
+        // 각 노드의 부모 노드 정보를 그래프에 반영
+        for (int w = 0; w < N; w++) {
+            int parent = Integer.parseInt(word[w]);
+            if (parent == -1) {
+                topnode = w;  // topnode를 찾는다
+            } else {
+                graph[parent][w] = 1;  // 부모 노드와 자식 노드를 연결
+            }
+        }
+        
+        // BFS 시작
+        bfs(topnode);
+    }
+    
+    static void bfs(int n) {
+        q.add(n);  // 시작 노드를 큐에 넣고
+        visit[n] = true;  // 방문 처리
+        
+        while (!q.isEmpty()) {
+            int abcd = q.poll();  // 큐에서 하나씩 꺼내서 탐색
+            
+            // 현재 노드와 연결된 노드들 탐색
+            for (int j = 0; j < N; j++) {
+                if (graph[abcd][j] == 1 && !visit[j]) {  // 연결되어 있고 아직 방문하지 않았다면
+                    q.add(j);  // 큐에 넣고
+                    visit[j] = true;  // 방문 처리
+                    System.out.println(j);  // 탐색한 노드 출력
+                }
+            }
+            
+            // 만약 연결된 자식 노드가 없으면 최종 노드 목록에 추가
+            boolean hasChild = false;
+            for (int j = 0; j < N; j++) {
+                if (graph[abcd][j] == 1) {
+                    hasChild = true;
+                    break;
+                }
+            }
+            if (!hasChild) {
+                finallist.add(abcd);  // 자식이 없는 노드를 최종 목록에 추가
+            }
+        }
+        
+        // 최종 노드 출력
+        System.out.println("Final nodes (no children): " + finallist);
+    }
+}
