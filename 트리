@@ -1,0 +1,73 @@
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+class Main {
+    static int graph[][],N;
+    static boolean visit[];
+    static Queue<Integer> q = new LinkedList<>();
+    static ArrayList<Integer> finallist = new ArrayList<>();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Integer> result = new ArrayList<>();
+        int topnode = 0;
+        int N = sc.nextInt();
+        sc.nextLine();
+        graph = new int[N][N];
+        visit = new boolean[N];
+        int resultint = 0;
+        
+        
+        String str = sc.nextLine();
+        String word[] = str.split(" ");
+        for(int w = 0;w<N;w++){
+            if(Integer.parseInt(word[w])==-1){
+                topnode = w;
+            }else{
+                graph[Integer.parseInt(word[w])][w] = 1;
+            }
+        }
+        
+        int minus = Integer.parseInt(sc.nextLine());
+        
+       bfs(topnode);
+       
+       for(int ad : finallist){
+           result.add(ad);
+           resultint = resultint + 1;
+       }
+       
+       finallist.clear();
+       visit = new boolean[N];
+       bfs(minus);
+       
+        for(int adsdf : finallist){
+           resultint = resultint - 1;
+       }
+       
+        System.out.println(resultint);
+    }
+    
+    
+    private static void bfs(int n){
+        q.add(n);
+        visit[n] = true;
+        
+        while(!q.isEmpty()){
+            int abcd = q.poll();
+            int count = 0;
+            for(int j = 0;j<N;j++){
+                if(graph[n][j] == 1 && visit[j] == false){
+                    count = count + 1;
+                    q.add(j);
+                    visit[j] = true;
+                }
+            }
+            if(count == 0){
+                finallist.add(abcd);
+                System.out.println(abcd);
+            }
+        }
+    }
+}
