@@ -58,7 +58,7 @@ class Main {
             int abcd = q.poll();
             int count = 0;
             for(int j = 0;j<N;j++){
-                if(graph[n][j] == 1 && visit[j] == false){
+                if(graph[abcd][j] == 1 && visit[j] == false){
                     count = count + 1;
                     q.add(j);
                     visit[j] = true;
