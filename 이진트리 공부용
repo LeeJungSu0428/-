@@ -1,0 +1,77 @@
+// 이진트리의 노드 클래스
+class TreeNode {
+    int value;
+    TreeNode left, right;
+
+    // 노드 생성자
+    public TreeNode(int value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+// 이진트리 클래스
+class BinaryTree {
+    TreeNode root;
+
+    public BinaryTree() {
+        root = null;
+    }
+
+    // 트리에 값 삽입하는 함수
+    public void insert(int value) {
+        root = insertRecursive(root, value);
+    }
+
+    private TreeNode insertRecursive(TreeNode node, int value) {
+        // 트리가 비어있는 경우 새로운 노드를 생성
+        if (node == null) {
+            return new TreeNode(value);
+        }
+
+        // 값이 현재 노드의 값보다 작은 경우 왼쪽 서브트리로 이동
+        if (value < node.value) {
+            node.left = insertRecursive(node.left, value);
+        } 
+        // 값이 현재 노드의 값보다 큰 경우 오른쪽 서브트리로 이동
+        else if (value > node.value) {
+            node.right = insertRecursive(node.right, value);
+        }
+
+        // 현재 노드를 반환
+        return node;
+    }
+
+    // 이진트리 순차적으로 출력하는 함수 (중위순회)
+    public void inorderTraversal() {
+        inorderRecursive(root);
+    }
+
+    private void inorderRecursive(TreeNode node) {
+        if (node != null) {
+            inorderRecursive(node.left);
+            System.out.print(node.value + " ");
+            inorderRecursive(node.right);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+
+        // 트리에 값 삽입
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(60);
+        tree.insert(80);
+
+        // 트리 순회 출력
+        System.out.println("이진트리 중위순회 결과:");
+        tree.inorderTraversal();  // 20 30 40 50 60 70 80
+    }
+}
