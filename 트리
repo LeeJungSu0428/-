@@ -148,3 +148,121 @@ class Main {
         System.out.println("Final nodes (no children): " + finallist);
     }
 }
+
+
+
+
+
+
+
+--------------------------------------------------------- 완성본
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+class Main {
+    static int graph[][],N,count1;
+    static boolean visit[];
+    static Queue<Integer> q = new LinkedList<>();
+    static ArrayList<Integer> finallist = new ArrayList<>();
+    static ArrayList<Integer> dellist = new ArrayList<>();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Integer> result = new ArrayList<>();
+        int topnode = -1;
+        N = sc.nextInt();
+        sc.nextLine();
+        graph = new int[N][N];
+        visit = new boolean[N];
+        int resultint = 0;
+        
+        
+        String str = sc.nextLine();
+        String word[] = str.split(" ");
+        for(int w = 0;w<N;w++){
+            int check = Integer.parseInt(word[w]);
+            if(check==-1){
+                topnode = w;
+            }else{
+                graph[check][w] = 1;
+            }
+        }
+        
+        
+        int minus = Integer.parseInt(sc.nextLine());
+        
+       bfs(topnode);
+       
+       visit = new boolean[N];
+       bfsdel(minus);
+       
+       
+         for(int qe = 0;qe<N;qe++){
+               if(graph[qe][minus]==1){
+                   graph[qe][minus]=0;
+               }
+           }
+           
+        for(int qp = 0;qp<count1;qp++){
+           int delcheck = dellist.get(qp);
+           int delcheck2 = dellist.get(qp+1);
+           graph[delcheck][delcheck2] = 0;
+           
+        }
+       
+       
+      finallist.clear();
+      visit = new boolean[N];       
+      bfs(topnode);
+      
+      for(int qwerf : finallist){
+          resultint = resultint + 1;
+      }
+      if(minus == topnode){
+          System.out.println("0");
+      }else{
+      System.out.println(resultint);
+        }
+    }
+    
+    
+    private static void bfs(int n){
+        q.add(n);
+        visit[n] = true;
+        
+        while(!q.isEmpty()){
+            int abcd = q.poll();
+            int count = 0;
+            for(int j = 0;j<N;j++){
+                if(graph[abcd][j] == 1 && visit[j] == false){
+                    count = count + 1;
+                    q.add(j);
+                    visit[j] = true;
+                }
+            }
+            if(count == 0){
+                finallist.add(abcd);
+            }
+        }
+    }
+    
+        private static void bfsdel(int n){
+        q.add(n);
+        visit[n] = true;
+        count1 = 0;
+        dellist.add(n);
+        
+        while(!q.isEmpty()){
+            int abcde = q.poll();
+            for(int j = 0;j<N;j++){
+                if(graph[abcde][j] == 1 && visit[j] == false){
+                    count1 = count1 + 1;
+                    q.add(j);
+                    dellist.add(j);
+                    visit[j] = true;
+                }
+            }
+        }
+    }
+}
