@@ -12,7 +12,7 @@ class Main {
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> result = new ArrayList<>();
         int topnode = 0;
-        int N = sc.nextInt();
+        int N = sc.nextInt();                        ----- 중복선언 조심!
         sc.nextLine();
         graph = new int[N][N];
         visit = new boolean[N];
