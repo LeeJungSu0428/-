@@ -1,0 +1,53 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class Main {
+    static ArrayList<Integer> numlist = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6,7,8,9));
+    static int plusint, minusint, finalint;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String N = sc.nextLine();
+        int broken = Integer.parseInt(sc.nextLine());
+        String str = sc.nextLine();
+        String word[] = str.split(" ");
+        for(int i = 0;i<broken;i++){
+            numlist.remove(Integer.parseInt(word[i]));
+        }
+        
+        
+    }
+    
+    
+    private void check(String start){
+        int numlength = start.length();
+        int asd = 0;
+        boolean factcheck = true;
+        while(true){
+            asd++;
+            int startint1 = Integer.parseInt(start) - asd;
+            int startint2 = Integer.parseInt(start) + asd;
+            for(int o = 0;o<numlength;o++){
+                String a = Integer.toString(startint1);
+                if(!(start.charAt(o)).equals(a.charAt(o))){
+                    factcheck = false;
+                    break;
+                }
+               
+            }
+        if(factcheck == true){
+            finalint = startint1;
+        }else{
+            for(int o = 0;o<numlength;o++){
+                String a = Integer.toString(startint1);
+                if(!(start.charAt(o)).equals(a.charAt(o))){
+                    factcheck = false;
+                    break;
+                }
+               
+            }
+            
+        }    
+        }
+    }
+}
