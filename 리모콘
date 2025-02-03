@@ -2,9 +2,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.lang.Math;
+import java.lang.StringBuilder;
 
 class Main {
     static ArrayList<Integer> numlist = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6,7,8,9));
+    static StringBuilder sb = new StringBuilder();
     static int finalint;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -36,43 +38,32 @@ class Main {
     
     
     private static void check(String start){
-        int numlength = start.length();
-        int asd = 0;
-        System.out.println("gogogo");
-        boolean faa = true;
-        boolean faaa = true;
-        while(true){
-            asd++;
-            int startint1 = Integer.parseInt(start) - asd;
-            int startint2 = Integer.parseInt(start) + asd;
-            String start1 = Integer.toString(startint1);
-            String start2 = Integer.toString(startint2);
-            for(int o = 0;o<start1.length();o++){
-                faa = numlist.contains(start1.charAt(o));
-                if(!faa){
-                    break;
+        ArrayList<Integer> faircompare = new ArrayList<>();
+        boolean factcheck = false;
+        for(int j = 0;j<start.length();j++){
+            int compare = 100;
+            char c = start.charAt(j);
+            int asdf = Character.getNumericValue(c);
+            factcheck = numlist.contains(asdf);
+            if(factcheck){
+                sb.append(String.valueOf(c));
+            }else{
+                for(int q = 0;q<numlist.length;q++){
+                    int compare1 = Math.abs(asdf - numlist.get(q));
+                    if(compare1 < compare){
+                        faircompare.clear();
+                        faircompare.add(numlist.get(q));
+                        compare = compare1;
+                    }else if(compare1 = compare){
+                        faircompare.add(numlist.get(q));
+                    }
                 }
-               
-            }
-            for(int o = 0;o<start2.length();o++){
-                faaa = numlist.contains(start2.charAt(o));
-                if(!faaa){
-                    break;
-                }
-               
+                
+                
+                
+                
             }
             
-            if(faa){
-                finalint = Integer.parseInt(start) - startint1 + start1.length();
-                break;
-            }
-            
-            if(faaa){
-                finalint = startint2 - Integer.parseInt(start) + start2.length();
-                break;
-            }
-            
-        System.out.println(startint1 + " " + startint2);    
             
         }
     }
