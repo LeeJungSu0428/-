@@ -1,27 +1,41 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.lang.Math;
 
 class Main {
     static ArrayList<Integer> numlist = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6,7,8,9));
-    static int plusint, minusint, finalint;
+    static int finalint;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String N = sc.nextLine();
         int broken = Integer.parseInt(sc.nextLine());
+        if(broken == 0){
+            System.out.println(N.length());
+        }else{
         String str = sc.nextLine();
         String word[] = str.split(" ");
         for(int i = 0;i<broken;i++){
             numlist.remove(Integer.parseInt(word[i]));
         }
         
+        check(N);
+        
+        int compareint = Integer.parseInt(N) - 100;
+        
+        int finnal = Math.min(finalint,compareint);
+        
+        System.out.println(finnal);
+        }
         
     }
     
     
-    private void check(String start){
+    private static void check(String start){
         int numlength = start.length();
         int asd = 0;
+        boolean faa = true;
+        boolean faaa = true;
         while(true){
             int factcheck1 = 0;
             int factcheck2 = 0;
@@ -31,29 +45,29 @@ class Main {
             String start1 = Integer.toString(startint1);
             String start2 = Integer.toString(startint2);
             for(int o = 0;o<start1.length();o++){
-                String a = Integer.toString(startint1);
-                if((start.charAt(o)).equals(a.charAt(o))){
-                    factcheck1++;    
-                }else{
+                faa = numlist.contains(start1.charAt(o));
+                if(!faa){
                     break;
                 }
                
             }
-            for(int q = 0;q<start2.length();q++){
-                String b = Integer.toString(startint2);
-                if((start.charAt(q)).equals(b.charAt(q))){
-                    factcheck2++;    
-                }else{
+            for(int o = 0;o<start2.length();o++){
+                faaa = numlist.contains(start2.charAt(o));
+                if(!faaa){
                     break;
                 }
                
             }
             
-            if(factcheck1 == start1.length() && ){
-                
+            if(faa){
+                finalint = Integer.parseInt(start) - startint1 + start1.length();
+                break;
             }
             
-            
+            if(faaa){
+                finalint = startint2 - Integer.parseInt(start) + start2.length();
+                break;
+            }
             
             
             
