@@ -22,32 +22,41 @@ class Main {
     private void check(String start){
         int numlength = start.length();
         int asd = 0;
-        boolean factcheck = true;
         while(true){
+            int factcheck1 = 0;
+            int factcheck2 = 0;
             asd++;
             int startint1 = Integer.parseInt(start) - asd;
             int startint2 = Integer.parseInt(start) + asd;
-            for(int o = 0;o<numlength;o++){
+            String start1 = Integer.toString(startint1);
+            String start2 = Integer.toString(startint2);
+            for(int o = 0;o<start1.length();o++){
                 String a = Integer.toString(startint1);
-                if(!(start.charAt(o)).equals(a.charAt(o))){
-                    factcheck = false;
+                if((start.charAt(o)).equals(a.charAt(o))){
+                    factcheck1++;    
+                }else{
                     break;
                 }
                
             }
-        if(factcheck == true){
-            finalint = startint1;
-        }else{
-            for(int o = 0;o<numlength;o++){
-                String a = Integer.toString(startint1);
-                if(!(start.charAt(o)).equals(a.charAt(o))){
-                    factcheck = false;
+            for(int q = 0;q<start2.length();q++){
+                String b = Integer.toString(startint2);
+                if((start.charAt(q)).equals(b.charAt(q))){
+                    factcheck2++;    
+                }else{
                     break;
                 }
                
             }
             
-        }    
+            if(factcheck1 == start1.length() && ){
+                
+            }
+            
+            
+            
+            
+            
         }
     }
 }
