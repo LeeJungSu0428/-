@@ -80,3 +80,71 @@ class Main {
         }
     }
 }
+
+
+
+--------------------------------------------------------------------------------------------------------------
+
+
+
+import java.lang.Math;
+import java.util.ArrayList;
+
+class Main {
+    static int asdf;
+    static char c;
+    static int[][] num;
+    static ArrayList<Integer> numlist = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6,7,8,9));
+    public static void main(String[] args) {
+        System.out.println("Try programiz.pro");
+    }
+    
+    
+    
+    
+    
+    private static void firstnumber(String num){
+            ArrayList<Integer> faircompare = new ArrayList<>();
+            int compare = 11;
+            c = start.charAt(0);
+            int k = 0;
+            asdf = Character.getNumericValue(c);
+            if(numlist.contains(asdf)){
+                faircompare.add(asdf);
+                for(int q = 0;q<numlist.length;q++){
+                    if(asdf-numlist.get(q)==-1 || asdf-numlist.get(q) == 1){
+                        faircompare.add(q);
+                    }
+                    
+                }
+                for(int j : faircompare){
+                    num[k][0] = j*Math.pow(10,num.length()-1);
+                    k++;
+                }
+            }else{
+                for(int u = 0;u<numlist.length;u++){
+                    int compare1 = Math.abs(asdf - numlist.get(u));
+                    if(compare1 < compare){
+                        faircompare.clear();
+                        faircompare.add(numlist.get(u));
+                        compare = compare1;
+                    }else if(compare1 = compare){
+                        faircompare.add(numlist.get(u));
+                    }
+                }
+                
+                for(int qwe : faircompare){
+                    num[k][0] = qwe*Math.pow(10,num.length()-1);
+                    k++; 
+                
+            }
+    }
+    
+    
+    private static void lastcheck(String num){
+        if(num[])
+    }
+    
+    
+    
+}
