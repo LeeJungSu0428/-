@@ -91,7 +91,7 @@ import java.lang.Math;
 import java.util.ArrayList;
 
 class Main {
-    static int asdf;
+    static int asdf,k;
     static char c;
     static int[][] num;
     static ArrayList<Integer> numlist = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6,7,8,9));
@@ -107,7 +107,7 @@ class Main {
             ArrayList<Integer> faircompare = new ArrayList<>();
             int compare = 11;
             c = start.charAt(0);
-            int k = 0;
+            k = 0;
             asdf = Character.getNumericValue(c);
             if(numlist.contains(asdf)){
                 faircompare.add(asdf);
@@ -142,7 +142,24 @@ class Main {
     
     
     private static void lastcheck(String num){
-        if(num[])
+        for(int w = 0;w<k;w++){
+            if(num[w][0] > asdf){
+                for(int first1 = 1;first1<num.length();first1++){
+                    num[w][first1] = numlist.get(0);
+                }
+            }else if(num[w][0] < asdf){
+                for(int first2 = 1;first2<num.length();first2++){
+                    num[w][first2] = numlist.get(numlist.size()-1);                
+            }
+        }else{
+            
+            
+            
+            
+            
+            
+            
+        }
     }
     
     
