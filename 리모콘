@@ -38,10 +38,11 @@ class Main {
     
     
     private static void check(String start){
+        int firstnum = 0;
         ArrayList<Integer> faircompare = new ArrayList<>();
         boolean factcheck = false;
         for(int j = 0;j<start.length();j++){
-            int compare = 100;
+            int compare = 11;
             char c = start.charAt(j);
             int asdf = Character.getNumericValue(c);
             factcheck = numlist.contains(asdf);
@@ -58,7 +59,18 @@ class Main {
                         faircompare.add(numlist.get(q));
                     }
                 }
+            int sss = start.length() - j - 1;
+        if(faircompare.size() == 1){
+            firstnum = faircompare.get(0)*Math.pow(10,sss);
+        }else{
+            int num1 = faircompare.get(0)*Math.pow(10,sss);
+            int num2 = faircompare.get(1)*Math.pow(10,sss);
+            if(Integer.parseInt(start) - num1 > Integer.parseInt(start) - num2){
                 
+            }
+            
+            
+        }        
                 
                 
                 
