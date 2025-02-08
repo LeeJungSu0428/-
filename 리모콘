@@ -165,3 +165,108 @@ class Main {
     
     
 }
+
+
+------------------------------------------------------------------------------------------------------------------
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // 목표 채널 N
+        int N = sc.nextInt();
+        // 고장난 버튼 개수 M
+        int M = sc.nextInt();
+        
+        // 고장난 버튼을 입력받아 Set에 저장
+        Set<Integer> brokenButtons = new HashSet<>();
+        if (M > 0) {
+            for (int i = 0; i < M; i++) {
+                brokenButtons.add(sc.nextInt());
+            }
+        }
+
+        // 기본적으로 100번 채널에서 시작
+        int currentChannel = 100;
+        
+        // 100번 채널에서 N으로 이동할 때 최소 버튼 횟수 초기화
+        int minButtonPress = Math.abs(N - currentChannel);
+        
+        // 숫자 버튼을 눌러서 채널 N을 입력할 수 있는지 확인
+        for (int i = 0; i <= 500000; i++) {
+            String str = String.valueOf(i);
+            boolean isPossible = true;
+            
+            // 채널 번호를 만들 때 고장난 버튼이 있으면 안 된다.
+            for (char c : str.toCharArray()) {
+                if (brokenButtons.contains(c - '0')) {
+                    isPossible = false;
+                    break;
+                }
+            }
+            
+            if (isPossible) {
+                // 숫자 버튼을 눌러서 채널을 이동한 후, + 또는 - 버튼을 눌러야 할 횟수
+                minButtonPress = Math.min(minButtonPress, str.length() + Math.abs(i - N));
+            }
+        }
+
+        System.out.println(minButtonPress);
+    }
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // 목표 채널 N
+        int N = sc.nextInt();
+        // 고장난 버튼의 개수 M
+        int M = sc.nextInt();
+        
+        // 고장난 버튼을 입력받아 Set에 저장
+        Set<Integer> brokenButtons = new HashSet<>();
+        if (M > 0) {
+            for (int i = 0; i < M; i++) {
+                brokenButtons.add(sc.nextInt());
+            }
+        }
+
+        // 기본적으로 100번 채널에서 시작
+        int currentChannel = 100;
+
+        // 100번 채널에서 N으로 이동할 때 최소 버튼 횟수 초기화
+        int minButtonPress = Math.abs(N - currentChannel);
+        
+        // 숫자 버튼을 눌러서 채널 N을 입력할 수 있는지 확인
+        for (int i = 0; i <= 500000; i++) {
+            String str = String.valueOf(i);
+            boolean isPossible = true;
+            
+            // 채널 번호를 만들 때 고장난 버튼이 있으면 안 된다.
+            for (char c : str.toCharArray()) {
+                if (brokenButtons.contains(c - '0')) {
+                    isPossible = false;
+                    break;
+                }
+            }
+            
+            if (isPossible) {
+                // 숫자 버튼을 눌러서 채널을 이동한 후, + 또는 - 버튼을 눌러야 할 횟수
+                minButtonPress = Math.min(minButtonPress, str.length() + Math.abs(i - N));
+            }
+        }
+
+        System.out.println(minButtonPress);
+    }
+}
+
